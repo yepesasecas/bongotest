@@ -63,10 +63,7 @@ class NotificationsController < ApplicationController
 
   def callback
     @notification = Notification.create status: 1, order_id: 1
-    respond_to do |format|
-      format.html { render "Success" }
-      format.json { render "Success" }
-    end
+    respond_with("Success", :status => 200, :location => "nil")
   end
 
   private

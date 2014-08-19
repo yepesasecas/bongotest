@@ -14,7 +14,7 @@
     <% @notifications.each do |notification| %>
       <tr>
         <td><%= notification.status %></td>
-        <td><%= notification.order_id %></td>
+        <td><%= notification.created_at %></td>
         <td><%= link_to 'Show', notification %></td>
         <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
         <td><%= link_to 'Destroy', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>

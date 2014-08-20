@@ -63,7 +63,7 @@ class NotificationsController < ApplicationController
 
   def callback
     @notification = Notification.create status: 1, order_id: 1
-    render text: "Success"
+    render text: "SUCCESS"
   end
 
   private

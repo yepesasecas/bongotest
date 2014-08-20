@@ -62,7 +62,7 @@ class NotificationsController < ApplicationController
   end
 
   def callback
-    @notification = Notification.create status: params["status"].to_s, order: params["order"].to_s, partner_key: params["partner_key"].to_s
+    @notification = Notification.create status: "NP", partner_key: "1q2w3e"
     render text: "SUCCESS"
   end
 

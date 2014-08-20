@@ -4,8 +4,10 @@
 <table>
   <thead>
     <tr>
+      <th>Created</th>
       <th>Status</th>
       <th>Order</th>
+      <th>Partner_key</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,16 +15,11 @@
   <tbody>
     <% @notifications.each do |notification| %>
       <tr>
+        <td><%= distance_of_time_in_words notification.created_at, Time.now%> ago</td>
         <td><%= notification.status %></td>
-        <td><%= notification.created_at %></td>
-        <td><%= link_to 'Show', notification %></td>
-        <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
-        <td><%= link_to 'Destroy', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= notification.order %></td>
+        <td><%= notification.partner_key %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Notification', new_notification_path %>

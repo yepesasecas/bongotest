@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
   def index
-    @notifications = Notification.all
+    @notifications = Notification.all.order("created_at DESC")
   end
 
   # GET /notifications/1
@@ -62,7 +62,7 @@ class NotificationsController < ApplicationController
   end
 
   def callback
-    @notification = Notification.create status: 1, order_id: 1
+    @notification = Notification.create status: params["status"], order: params["order"], partner_key: params["partner_key"]
     render text: "SUCCESS"
   end
 

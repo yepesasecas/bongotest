@@ -25,7 +25,6 @@ class NotificationsController < ApplicationController
   # POST /notifications.json
   def create
     @notification = Notification.new(notification_params)
-
     respond_to do |format|
       if @notification.save
         format.html { redirect_to @notification, notice: 'Notification was successfully created.' }
@@ -63,6 +62,7 @@ class NotificationsController < ApplicationController
 
   def callback
     # order_id = Notification.decode(params["order"])
+    p params
     @notification = Notification.create status: params["status"], partner_key: params["partner_key"], order: "-"
     render text: "SUCCESS"
   end

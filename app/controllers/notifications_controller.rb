@@ -67,7 +67,10 @@ class NotificationsController < ApplicationController
     else
       ip = "Not Identified"
     end
-    @notification = Notification.create status: params["status"], partner_key: params["partner_key"], order: order_id, ip: ip
+    @notification = Notification.create status:      params["status"], 
+                                        partner_key: params["partner_key"], 
+                                        order:       order_id, 
+                                        ip:          ip
     render text: "SUCCESS"
   end
 

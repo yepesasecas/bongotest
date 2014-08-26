@@ -27,11 +27,19 @@ class NotificationsController < ApplicationController
     @notification = Notification.new(notification_params)
     respond_to do |format|
       if @notification.save
-        format.html { redirect_to @notification, notice: 'Notification was successfully created.' }
+        format.html do
+          redirect_to 
+            @notification, 
+            notice: 'Notification was successfully created.' 
+        end
         format.json { render :show, status: :created, location: @notification }
       else
         format.html { render :new }
-        format.json { render json: @notification.errors, status: :unprocessable_entity }
+        format.json do
+          render 
+            json: @notification.errors, 
+            status: :unprocessable_entity 
+        end
       end
     end
   end
@@ -41,11 +49,24 @@ class NotificationsController < ApplicationController
   def update
     respond_to do |format|
       if @notification.update(notification_params)
-        format.html { redirect_to @notification, notice: 'Notification was successfully updated.' }
-        format.json { render :show, status: :ok, location: @notification }
+        format.html do 
+          redirect_to 
+            @notification, 
+            notice: 'Notification was successfully updated.' 
+        end
+        format.json do
+          render 
+            :show, 
+            status: :ok,
+            location: @notification 
+        end
       else
         format.html { render :edit }
-        format.json { render json: @notification.errors, status: :unprocessable_entity }
+        format.json do 
+          render
+            json: @notification.errors, 
+            status: :unprocessable_entity 
+        end
       end
     end
   end
@@ -55,24 +76,30 @@ class NotificationsController < ApplicationController
   def destroy
     @notification.destroy
     respond_to do |format|
-      format.html { redirect_to notifications_url, notice: 'Notification was successfully destroyed.' }
+      format.html do
+        redirect_to 
+          notifications_url,
+          notice: 'Notification was successfully destroyed.' 
+      end
       format.json { head :no_content }
     end
   end
 
   def callback
     order_id = Notification.decode(params["order"])
-    ip = if request.remote_ip
-      request.remote_ip 
-    else
-      "Not Identified"
-    end
-    @notification = Notification.create(
-      status: params["status"], 
-      partner_key: params["partner_key"], 
-      order: order_id, 
-      ip: ip
-    )
+    ip = 
+      if request.remote_ip
+        request.remote_ip 
+      else
+        "Not Identified"
+      end
+    @notification = 
+      Notification.create(
+        status: params["status"], 
+        partner_key: params["partner_key"], 
+        order: order_id, 
+        ip: ip
+      )
     render text: "SUCCESS"
   end
 

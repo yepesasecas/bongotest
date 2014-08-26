@@ -62,15 +62,17 @@ class NotificationsController < ApplicationController
 
   def callback
     order_id = Notification.decode(params["order"])
-    if request.remote_ip
-      ip = request.remote_ip 
+    ip = if request.remote_ip
+      request.remote_ip 
     else
-      ip = "Not Identified"
+      "Not Identified"
     end
-    @notification = Notification.create status:      params["status"], 
-                                        partner_key: params["partner_key"], 
-                                        order:       order_id, 
-                                        ip:          ip
+    @notification = Notification.create(
+      status: params["status"], 
+      partner_key: params["partner_key"], 
+      order: order_id, 
+      ip: ip
+    )
     render text: "SUCCESS"
   end
 

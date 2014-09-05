@@ -1,5 +1,6 @@
 class NotificationsController < ApplicationController
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
+  before_action :allow_iframe
 
   # GET /notifications
   # GET /notifications.json
@@ -112,5 +113,9 @@ class NotificationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def notification_params
       params.require(:notification).permit(:status, :order_id)
+    end
+
+    def allow_iframe
+      response.headers.except! 'X-Frame-Options'
     end
 end

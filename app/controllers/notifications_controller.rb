@@ -1,86 +1,60 @@
 class NotificationsController < ApplicationController
   before_action :set_notification, only: [:show, :edit, :update, :destroy]
-  before_action :allow_iframe
 
-  # GET /notifications
-  # GET /notifications.json
   def index
     @notifications = Notification.all.order("created_at DESC")
   end
 
-  # GET /notifications/1
-  # GET /notifications/1.json
   def show
   end
 
-  # GET /notifications/new
   def new
     @notification = Notification.new
   end
 
-  # GET /notifications/1/edit
   def edit
   end
 
-  # POST /notifications
-  # POST /notifications.json
   def create
     @notification = Notification.new(notification_params)
     respond_to do |format|
       if @notification.save
         format.html do
-          redirect_to 
-            @notification, 
-            notice: 'Notification was successfully created.' 
+          redirect_to @notification, notice: 'Notification was successfully created.' 
         end
         format.json { render :show, status: :created, location: @notification }
       else
         format.html { render :new }
         format.json do
-          render 
-            json: @notification.errors, 
-            status: :unprocessable_entity 
+          render json: @notification.errors, status: :unprocessable_entity 
         end
       end
     end
   end
 
-  # PATCH/PUT /notifications/1
-  # PATCH/PUT /notifications/1.json
   def update
     respond_to do |format|
       if @notification.update(notification_params)
         format.html do 
-          redirect_to 
-            @notification, 
-            notice: 'Notification was successfully updated.' 
+          redirect_to @notification, notice: 'Notification was successfully updated.' 
         end
         format.json do
-          render 
-            :show, 
-            status: :ok,
-            location: @notification 
+          render :show, status: :ok, location: @notification 
         end
       else
         format.html { render :edit }
         format.json do 
-          render
-            json: @notification.errors, 
-            status: :unprocessable_entity 
+          render json: @notification.errors, status: :unprocessable_entity 
         end
       end
     end
   end
 
-  # DELETE /notifications/1
-  # DELETE /notifications/1.json
   def destroy
     @notification.destroy
     respond_to do |format|
       format.html do
-        redirect_to 
-          notifications_url,
-          notice: 'Notification was successfully destroyed.' 
+        redirect_to notifications_url,notice: 'Notification was successfully destroyed.' 
       end
       format.json { head :no_content }
     end
@@ -88,34 +62,32 @@ class NotificationsController < ApplicationController
 
   def callback
     order_id = Notification.decode(params["order"])
-    ip = 
+    ip = get_request_ip
+    @notification = Notification.create(
+      status: params["status"], 
+      partner_key: params["partner_key"], 
+      order: order_id, 
+      ip: ip,
+      token: params["token"]
+    )
+    render text: "SUCCESS"
+  end
+
+  private
+    def set_notification
+      @notification = Notification.find(params[:id])
+    end
+
+    def notification_params
+      params.require(:notification).permit(:status, :order_id)
+    end
+
+    def get_request_ip
       if request.remote_ip
         request.remote_ip 
       else
         "Not Identified"
       end
-    @notification = 
-      Notification.create(
-        status: params["status"], 
-        partner_key: params["partner_key"], 
-        order: order_id, 
-        ip: ip
-      )
-    render text: "SUCCESS"
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_notification
-      @notification = Notification.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def notification_params
-      params.require(:notification).permit(:status, :order_id)
-    end
-
-    def allow_iframe
-      response.headers.except! 'X-Frame-Options'
-    end
 end

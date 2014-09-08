@@ -61,7 +61,7 @@ class NotificationsController < ApplicationController
   end
 
   def callback
-    p params["order"]
+    p params
     order_id = Notification.decode(params["order"])
     ip       = get_request_ip
     @notification = Notification.create(

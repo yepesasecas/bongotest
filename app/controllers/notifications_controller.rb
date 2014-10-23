@@ -64,12 +64,11 @@ class NotificationsController < ApplicationController
     p params
     order_id = Notification.xml_id params["order"]
     ip       = get_request_ip
-    @notification = Notification.create(
-      status: params["status"], 
-      partner_key: params["partner_key"], 
-      order: order_id, 
-      ip: ip,
-      token: params["token"]
+    @notification = Notification.create(status: params["status"], 
+                                        partner_key: params["partner_key"],
+                                        order: order_id, 
+                                        ip: ip, 
+                                        token: params["token"]
     )
     render text: "SUCCESS"
   end

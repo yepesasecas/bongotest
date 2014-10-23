@@ -1,20 +1,20 @@
 <div class="row">
-  <div class="alert alert-success" role="alert">
-    <strong>Notifications Received:</strong> <%= Notification.count %>
-  </div>
   <div class="col-md-12">
     <div class="page-header">
-      <h1>How To use it</h1>
+      <h1>How to use it</h1>
     </div>
-      <ol>
-        <li>Set url <a href="#">http://bongotest.herokuapp.com/notifications/callback</a> as Callback URL in Partner Tools</li>
-        <li>Create an Order, wait one minute, refresh page.</li>
-        <li>See the notification in Listing Notifications Table.</li>
-      </ol>
+    <ol>
+      <li>Set url <a href="#">http://bongotest.herokuapp.com/notifications/callback</a> as Callback URL in Partner Tools</li>
+      <li>Create an Order, wait one minute, refresh page.</li>
+      <li>See the notification in Listing Notifications Table.</li>
+    </ol>
   </div>
   <div class="col-md-12">
     <div class="page-header">
-      <h1>Listing notifications</h1>
+      <h1>Listing Notifications</h1>
+    </div>
+    <div class="alert alert-success" role="alert">
+      <strong>Notifications Received:</strong> <%= Notification.count %>
     </div>
 
     <table class="table table-hover">
@@ -29,7 +29,6 @@
           <th colspan="3"></th>
         </tr>
       </thead>
-
       <tbody>
         <% @notifications.each do |notification| %>
         <tr>
@@ -42,7 +41,6 @@
         </tr>
         <% end %>
       </tbody>
-    </table>
-    
+    </table>    
   </div>
 </div>

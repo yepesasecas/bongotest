@@ -1,8 +1,9 @@
+require "base64"
+
 class Notification < ActiveRecord::Base
 
   def self.decode(order)
-    require "base64"
-    decode = Base64.decode64 order
+    Base64.decode64 order
   end
 
   def self.xml_id(order)

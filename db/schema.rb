@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140908144813) do
+ActiveRecord::Schema.define(version: 20141210205652) do
 
   create_table "notifications", force: true do |t|
     t.string   "status"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140908144813) do
     t.datetime "updated_at"
     t.string   "ip"
     t.string   "token"
+    t.text     "blob"
   end
 
 end

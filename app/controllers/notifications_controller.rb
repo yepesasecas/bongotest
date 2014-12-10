@@ -81,7 +81,11 @@ class NotificationsController < ApplicationController
     end
 
     def get_request_ip
-      request.remote_ip || "Not Identified"
+      if request.remote_ip
+        request.remote_ip
+      else 
+        "Not Identified"
+      end
     end
 
 end

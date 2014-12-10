@@ -77,7 +77,7 @@ class NotificationsController < ApplicationController
     end
 
     def notification_params
-      params.require(:notification).permit(:status, :order_id)
+      params.require(:notification).permit(:status, :order_id, :order)
     end
 
     def get_request_ip

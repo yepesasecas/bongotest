@@ -62,12 +62,12 @@ class NotificationsController < ApplicationController
 
   def callback
     p params
-    @notification = Notification.create(status:      params["status"], 
+    @notification = Notification.create(status: params["status"], 
                                         partner_key: params["partner_key"],
-                                        order:       Notification.xml_id params["order"], 
-                                        ip:          get_request_ip, 
-                                        token:       params["token"]
-                                        blob:        Notification.decode params["order"])
+                                        order: Notification.xml_id(params["order"]), 
+                                        ip: get_request_ip, 
+                                        token: params["token"],
+                                        blob: Notification.decode(params["order"]))
     render text: "SUCCESS"
   end
 

@@ -64,7 +64,7 @@ class NotificationsController < ApplicationController
     p params
     @notification = Notification.create(status: params["status"], 
                                         partner_key: params["partner_key"],
-                                        order: Notification.xml_id(params["order"]), 
+                                        order_id: Notification.xml_id(params["order"]), 
                                         ip: get_request_ip, 
                                         token: params["token"],
                                         blob: Notification.decode(params["order"]))
@@ -77,7 +77,7 @@ class NotificationsController < ApplicationController
     end
 
     def notification_params
-      params.require(:notification).permit(:status, :order_id, :order)
+      params.require(:notification).permit(:status, :order, :partner_key, :token)
     end
 
     def get_request_ip

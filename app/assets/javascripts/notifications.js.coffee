@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).ready ->
+  $("#search-oid").on "keyup", (e)->
+    oid = $(this).val()
+    
+    if oid == ""
+      $(".order-notification").show()
+    else
+      $(".order-notification").hide()
+      $(".order-notification[data-oid='" + oid + "']").show()

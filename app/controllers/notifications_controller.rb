@@ -61,9 +61,12 @@ class NotificationsController < ApplicationController
   end
 
   def callback
-    Notification.build_with params
-
-    render text: "SUCCESS"
+    notification = Notification.build_with params
+    if notification.save!
+      render text: "SUCCESS"
+    else
+      render text: "PAILA! No se pudo guardar la notification. :("
+    end
   end
 
   private

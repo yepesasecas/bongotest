@@ -3,7 +3,7 @@ class CreateNotifications < ActiveRecord::Migration
     create_table :notifications do |t|
       t.string  :status
       t.integer :order_id
-      t.text    :order, limit: false
+      t.text    :order
       t.string  :partner_key
       t.timestamps
     end

@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141210205652) do
+ActiveRecord::Schema.define(version: 20141211052245) do
 
   create_table "notifications", force: true do |t|
     t.string   "status"
-    t.integer  "order_id"
+    t.string   "order_id"
     t.text     "order"
     t.string   "partner_key"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "ip"
     t.string   "token"
-    t.text     "blob"
+    t.string   "token_hash"
   end
 
 end

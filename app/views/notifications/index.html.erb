@@ -26,6 +26,7 @@
           <th>Partner Key</th>
           <th>Server IP</th>
           <th>Token</th>
+          <th>One Way Hash</th>
           <th colspan="3"></th>
         </tr>
       </thead>
@@ -34,10 +35,11 @@
         <tr>
           <td><%= distance_of_time_in_words notification.created_at, Time.now%> ago</td>
           <td><%= notification.status %></td>
-          <td><%= notification.order %></td>
+          <td><%= notification.order_id %></td>
           <td><%= notification.partner_key %></td>
           <td><%= notification.ip %></td>
           <td><%= notification.token %></td>
+          <td><%= notification.token_hash %></td>
         </tr>
         <% end %>
       </tbody>

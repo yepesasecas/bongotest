@@ -8,7 +8,7 @@ class Notification < ActiveRecord::Base
     ip          = request[:request].remote_ip || "-"
 
     if params[:productID]
-      order      = params[:order]
+      order      = params
       order_id   = params[:productID]
       token_hash = "-"
       if params[:sellable]
@@ -21,9 +21,10 @@ class Notification < ActiveRecord::Base
         status = "-"
       end
     else
-      order      = Base64.decode64(params[:order])
-      order_id   = order.partition("idorder>")[2].partition("</idorder")[0] || "-"
-      token_hash = order.partition("hash>")[2].partition("</hash")[0] || "-"
+      order      = params
+      order_dec  = Base64.decode64(params[:order])
+      order_id   = order_dec.partition("idorder>")[2].partition("</idorder")[0] || "-"
+      token_hash = order_dec.partition("hash>")[2].partition("</hash")[0] || "-"
       status     = params[:status]
     end
 

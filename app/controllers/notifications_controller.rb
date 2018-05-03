@@ -11,10 +11,10 @@ class NotificationsController < ApplicationController
       if notification.save!
         render text: "SUCCESS"
       else
-        render text: "PAILA! No se pudo guardar la notification. :("
+        render text: "not able to save notification",  status: :internal_server_error
       end
     rescue
-      render text: "ERROR! No se pudo guardar la notification. :("
+      render text: "ERROR! Bad Request", status: :bad_request
     end
   end
 

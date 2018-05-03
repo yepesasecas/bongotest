@@ -6,5 +6,6 @@ Rails.application.routes.draw do
 
   root 'notifications#index'
 
-  match "*path" => redirect("/")
+  get "*path" => redirect("/")
+  post "*path" => redirect("/")
 end

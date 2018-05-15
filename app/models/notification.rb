@@ -33,6 +33,7 @@ class Notification < ActiveRecord::Base
       order_id   = order_dec.partition("idorder>")[2].partition("</idorder")[0] || "-"
       token_hash = order_dec.partition("hash>")[2].partition("</hash")[0] || "-"
       status     = params[:status]
+      order      = order_dec
     end
 
     new(order:       order,

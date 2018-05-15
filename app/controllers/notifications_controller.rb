@@ -5,16 +5,12 @@ class NotificationsController < ApplicationController
   end
 
   def callback
-    begin
-      notification = Notification.build_with params, request: request
+    notification = Notification.build_with params, request: request
 
-      if notification.save!
-        render text: "SUCCESS"
-      else
-        render text: "not able to save notification",  status: :internal_server_error
-      end
-    rescue
-      render text: "ERROR! Bad Request", status: :bad_request
+    if notification.save!
+      render text: "SUCCESS"
+    else
+      render text: "not able to save notification",  status: :internal_server_error
     end
   end
 

@@ -1,7 +1,7 @@
 class NotificationsController < ApplicationController
 
   def index
-    @notifications = Notification.all.order("created_at DESC")
+    @notifications = Notification.all.order("created_at DESC").limit(200)
   end
 
   def callback

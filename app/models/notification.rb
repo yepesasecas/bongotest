@@ -26,7 +26,11 @@ class Notification < ActiveRecord::Base
       order_id = params[:merchant_order_number]
       token_hash = "-"
       status     = params[:status]
-
+    elsif params["notification_type"]
+      order      = params.map{|k,v| "#{k}=#{v}"}.join('&')
+      order_id   = params["notification_id"]
+      token_hash = "-"
+      status     = params["status"]
     else
       order      = params.map{|k,v| "#{k}=#{v}"}.join('&')
       order_dec  = Base64.decode64(params[:order])
